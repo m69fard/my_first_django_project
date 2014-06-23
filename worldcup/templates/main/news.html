@@ -1,0 +1,10 @@
+<a href="{% url "main_news_detail" piece_news.id %}">
+    <table style="color:#000000">
+        <tr>
+            <td>{{ piece_news.head_line }}</td>
+        </tr>
+        <tr>
+            <td class="small">{{ piece_news.summary }}</td>
+        </tr>
+    </table>
+</a>

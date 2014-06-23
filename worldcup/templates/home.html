@@ -1,0 +1,30 @@
+{% extends 'base_home.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% comment %}
+{% block heading %}
+<h2 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">Teams</h2>
+{% endblock %}
+{% endcomment %}
+
+{% block content %}
+<div class="panel panel-default">
+   <div class="panel-heading">Teams</div>
+    <table class="table">
+    <tr>
+        <th>Name</th><th>Coach</th><th>FIFA Ranking</th>
+    </tr>
+        {% for team in teams %}
+            <tr>
+            {% include "main/team.html" %}
+            </tr>
+        {% empty %}
+            <tr>
+            <td>No teams.</td><td>&nbsp;</td><td>&nbsp;</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
+

@@ -1,0 +1,14 @@
+<a href="{% url "main_match_detail" match.id %}">
+    <table style="color:#000000">
+        <tr>
+            <td align="center"><image height="32" src='{{MEDIA_URL}}{{ match.first_team.flag }}'/></td>
+            <td> - </td>
+            <td align="center"><image height="32" src='{{MEDIA_URL}}{{ match.second_team.flag }}'/></td>
+        </tr>
+        <tr>
+            <td align="center" style="font-size:16px">{{ match.first_team_goals }}</td>
+            <td>&nbsp;</td>
+            <td align="center" style="font-size:16px">{{ match.second_team_goals }}</td>
+        </tr>
+    </table>
+</a>

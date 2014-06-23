@@ -1,0 +1,60 @@
+{% extends "base_home.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{ name }}{% endblock %}
+
+{% block heading %}
+    <div class="page-header">{{ match.first_team }} - {{ match.second_team }}</div>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-default">
+    <div class="panel-heading>" align="center">
+        <br>
+        <table>
+            <tr>
+                <td align="center"><image height="120" src='{{MEDIA_URL}}{{ first_team.flag }}'/></td>
+                <td align="center"><image height="120" src='{{MEDIA_URL}}{{ second_team.flag }}'/></td>
+            </tr>
+            <tr>
+                <td align="center" style="font-size:40px">{{ match.first_team_goals }}</td>
+                <td align="center" style="font-size:40px">{{ match.second_team_goals }}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="panel-body">
+        <div class="text-info">Date: {{ match.date }}</div>
+        <div class="text-info>">Time: {{ match.time }}</div>
+    </div>
+    <div class="panel-footer">
+        {{ match.like_count }} likes -
+            <a href='{% url "main_like_match" match.id %}'>
+            {% if likes %}
+                Unlike
+            {% else %}
+                like
+            {% endif %}
+        </a>
+    </div>
+    </div>
+        <div class="panel panel-default">
+        <div class="panel-heading">Comments</div>
+            <table class="table">
+                {% for comment in comments %}
+                    <tr><td>{% include "main/comment.html" %}</td></tr>
+                {% empty %}
+                    <tr><td>No comments.</td></tr>
+                {% endfor %}
+            </table>
+    </div>
+
+    {% if user.is_authenticated %}
+    <form action="" method="post" accept-charset="utf-8">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <p><input type="submit" class="btn btn-default" value="Send" /></p>
+    </form>
+    {% endif %}
+    <hr>
+{% endblock %}
+

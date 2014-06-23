@@ -1,0 +1,56 @@
+{% extends "base_home.html" %}
+
+{% block title %} {{ name }}{% endblock %}
+s
+{% block heading %}
+<h2 class="page-header"> {{ team.name }}</h2>
+<image height="200" src='{{MEDIA_URL}}{{ team.flag }}'/>
+{% endblock %}
+
+{% block content %}
+<ol class="list-unstyled">
+    <li class="list-group-item-heading"><h4>COACH</h4></li>
+    <li class="list-group-item">{{ team.coach }}</li>
+</ol>
+
+<ol class="list-unstyled">
+    <li class="list-group-item-heading" ><h4>PLAYERS</h4></li>
+    <li class="list-group-item-heading">Goalkeeper</li>
+        {% for gk in goalkeepers %}
+            <li class="list-group-item">
+                {{ gk }} <br>
+                <small>{{ gk.club }}</small>
+            </li>
+        {% empty %}
+            <li>No Goalkeepers</li>
+        {% endfor %}
+
+        <li class="list-group-item-heading">Defender</li>
+        {% for d in defenders %}
+            <li class="list-group-item"> {{ d }} <br>
+                <small>{{ d.club }}</small>
+            </li>
+        {% empty %}
+            <li>No Defenders</li>
+        {% endfor %}
+
+        <li class="list-group-item-heading">Midfielder</li>
+    {% for m in midfielders %}
+        <li class="list-group-item"> {{ m }} <br>
+            <small>{{ m.club }}</small>
+        </li>
+    {% empty %}
+        <li>No Midfielder</li>
+    {% endfor %}
+
+        <li class="list-group-item-heading">Forward</li>
+    {% for f in forwards %}
+        <li class="list-group-item"> {{ f }} <br>
+            <small>{{ f.club }}</small>
+        </li>
+    {% empty %}
+        <li>No Forwards</li>
+    {% endfor %}
+</ol>
+{% endblock %}
+

@@ -1,0 +1,49 @@
+{% extends 'base_home.html' %}
+{% load crispy_forms_tags %}
+
+{% block heading %}
+    <h2>{{ piece_news.head_line }}</h2>
+{% endblock %}
+
+{% block content %}
+    <div class="panel">
+        <div class="panel-body">
+            <table width="400">
+            <tr><td><div class=img-rounded><img height="400" src='{{MEDIA_URL}}{{ piece_news.image }}'/></div></td>
+            <tr><td align="justify"><br>{{ piece_news.text }}</td></tr>
+            </table>
+        </div>
+        <div class="panel-footer">tags:
+            {% for t in tags %} <a href='{% url 'main_news_tag' t %}'>{{ t }} </a>
+        {% endfor %}
+        <br>
+        {{ piece_news.like_count }} likes -
+        <a href='{% url "main_like_news" piece_news.id %}'>
+            {% if likes %}
+                Unlike
+            {% else %}
+                like
+            {% endif %}
+        </a>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Comments</div>
+            <table class="table">
+                {% for comment in comments %}
+                    <tr><td>{% include "main/comment.html" %}</td></tr>
+                {% empty %}
+                    <tr><td>No comments.</td></tr>
+                {% endfor %}
+            </table>
+    </div>
+
+    {% if user.is_authenticated %}
+    <form action="" method="post" accept-charset="utf-8">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <p><input type="submit" class="btn btn-default" value="Send" /></p>
+    </form>
+    {% endif %}
+    <hr>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+   {% block rows %}
+       <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                 <div class="panel-heading">News</div>
+                <table class="table">
+                    {% for piece_news in news %}
+                        <tr><td>{% include "main/news.html" %}</td></tr>
+                    {% empty %}
+                        <tr><td>No news.</td></tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Matches</div>
+                    <table class="table">
+                        {% for match in matches %}
+                            <tr><td>{% include "main/match.html" %}</td></tr>
+                        {% empty %}
+                            <tr><td>No matches.</td></tr>
+                        {% endfor %}
+                    </table>
+            </div>
+        </div>
+       </div>
+   {% endblock %}
